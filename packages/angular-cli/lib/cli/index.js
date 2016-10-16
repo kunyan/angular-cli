@@ -24,6 +24,9 @@ module.exports = function(options) {
 
   const oldStderrWrite = process.stderr.write;
   process.stderr.write = function (line) {
+    if (line === '') {
+      return;
+    }
     line = line.toString()
       .replace(/ember-cli(?!.com)/g, 'angular-cli')
       .replace(/\bember\b(?!-cli.com)/g, 'ng');
